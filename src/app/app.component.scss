@@ -4,3 +4,8 @@ $areas:"header" "content" "footer";
     display: grid;
     grid-template-areas: $areas;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
