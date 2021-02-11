@@ -1,0 +1,6 @@
+$areas:"header" "content" "footer";
+
+:host {
+    display: grid;
+    grid-template-areas: $areas;
+}
