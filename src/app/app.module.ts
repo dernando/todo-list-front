@@ -11,14 +11,12 @@ import { FooterComponent } from './common/footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { TasksComponent } from './pages/tasks/tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    TasksComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
