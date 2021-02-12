@@ -1,12 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
+import { Tasks } from "../../models/Tasks";
+import { TasksService } from "../../services/tasks.service";
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit{
+
+  tasks:Tasks[];
+
+  constructor(
+    private taskService: TasksService
+  ) {
+
+  }
+
+  ngOnInit(){
+    this.taskService.getAll().subscribe(
+      item => {
+        console.log('res', item);
+      },
+      error => {
+        console.log('error', error);
+      }
+    )
+  }
 
   todo = [
     'Get to work',
