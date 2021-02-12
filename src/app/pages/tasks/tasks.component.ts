@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import { Tasks } from "../../models/Tasks";
+import { Tasks, TasksStatus } from "../../models/Tasks";
 import { TasksService } from "../../services/tasks.service";
 
 @Component({
@@ -12,17 +12,16 @@ import { TasksService } from "../../services/tasks.service";
 export class TasksComponent implements OnInit{
 
   tasks:Tasks[];
+  todoTasks:Tasks[];
 
   constructor(
     private taskService: TasksService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(){
     this.taskService.getAll().subscribe(
       item => {
-        console.log('res', item);
+        this.todoTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.pending);
       },
       error => {
         console.log('error', error);
@@ -38,11 +37,6 @@ export class TasksComponent implements OnInit{
   ];
 
   done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
   ];
 
   drop(event: CdkDragDrop<string[]>) {
@@ -55,6 +49,10 @@ export class TasksComponent implements OnInit{
                         event.previousIndex,
                         event.currentIndex);
     }
+  }
+
+  edit(item) {
+    console.log('edit item', item);
   }
 
 }

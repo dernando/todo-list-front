@@ -3,10 +3,13 @@
         <div class="drag pending">
             <div
                 cdkDropList
-                [cdkDropListData]="todo"
+                [cdkDropListData]="todoTasks"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+                <div class="example-box" *ngFor="let item of todoTasks" cdkDrag>
+                    <button (click)="edit(item)">teste</button>    
+                    {{item.description}}
+                </div>
             </div>
         </div>
         <div class="drag finished">
