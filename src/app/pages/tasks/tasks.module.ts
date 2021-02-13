@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { TasksComponent } from './tasks.component';
 import { CardTaskComponent } from './card-task/card-task.component';
+import { ValidationFormComponent } from './validation-form/validation-form.component';
 
 const routes: Routes = [{
   path: "",
@@ -13,7 +14,7 @@ const routes: Routes = [{
 
 
 @NgModule({
-  declarations: [TasksComponent, CardTaskComponent],
+  declarations: [TasksComponent, CardTaskComponent, ValidationFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -25,10 +25,18 @@
       mat-button 
       mat-stroked-button 
       color="warn"
+      [mat-dialog-close]=""
     >
       Cancelar
     </button>
     
-    <button type="submit" mat-raised-button color="primary" [disabled]="taskForm.invalid">Salvar</button>
+    <button 
+      type="submit" 
+      mat-raised-button 
+      color="primary" 
+      [disabled]="taskForm.invalid"
+      >
+      Salvar
+    </button>
   </div>
 </form>

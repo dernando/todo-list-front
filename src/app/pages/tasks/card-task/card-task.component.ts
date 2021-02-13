@@ -5,14 +5,10 @@ import { Task } from "../../../models/task";
   templateUrl: './card-task.component.html',
   styleUrls: ['./card-task.component.scss']
 })
-export class CardTaskComponent implements OnInit {
+export class CardTaskComponent {
 
   @Input('item') item: Task;
 
   constructor() { }
-
-  ngOnInit(): void {
-    console.log('item', this.item);
-  }
 
 }

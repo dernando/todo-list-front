@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
     description: [null,[Validators.required]],
     status:[TasksStatus.TasksStatusEnum.pending],
     restartedTimes: [null]
-  })
+  });
 
   constructor(
     private formBuilder: FormBuilder,

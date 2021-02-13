@@ -3,6 +3,7 @@ export class Task {
     description: string;
     owner: string;
     status: TasksStatus.TasksStatusEnum;
+    restartedTimes?: number;
 }
 
 export namespace TasksStatus {

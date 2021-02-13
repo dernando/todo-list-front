@@ -3,9 +3,12 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import { MatDialog } from '@angular/material/dialog';
 
 import { FormComponent } from '../../shared/task-form/form.component';
+import { ValidationFormComponent } from './validation-form/validation-form.component';
 
 import { Task, TasksStatus } from "../../models/task";
 import { TasksService } from "../../services/tasks.service";
+import { ValidatorService } from "../../services/validator.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tasks',
@@ -20,44 +23,44 @@ export class TasksComponent implements OnInit{
 
   constructor(
     private taskService: TasksService,
-    public taskDialog: MatDialog
+    private ValidatorService: ValidatorService,
+    public taskDialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(){
     this.taskService.getAll().subscribe(
       item => {
-        this.pendingTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.pending);
-        this.finishedTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.finished);
-      },
+        this.setTasksList(item);
+       },
       error => {
-        console.log('error', error);
       }
     )
   }
 
-  done = [
-  ];
+  setTasksList(tasks:Task[]) {
+    this.tasks = tasks;      
+    this.pendingTasks = this.tasks.filter(item => item.status==TasksStatus.TasksStatusEnum.pending);
+    this.finishedTasks = this.tasks.filter(item => item.status==TasksStatus.TasksStatusEnum.finished);
+  }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('event', event.container.data[0])
-    console.log('event', event.previousContainer.data[0]['status'])
-    let item = event.previousContainer.data[0];
-
     if (event.previousContainer !== event.container) {
+
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+        
+        const task = event['container']['data'][event.currentIndex];
+      
+        if(event.previousContainer.id==="cdk-drop-list-1") {
+          this.requestAuthorizationMovement(task);
+          return;
+        }
 
-        this.updateTaskStatus(item);
-    
+        this.updateTaskStatus(task);
     }
-    /*else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }*/
   }
 
   openTaskDialog(item: Task): void {
@@ -68,6 +71,22 @@ export class TasksComponent implements OnInit{
     });
   }
 
+  requestAuthorizationMovement(task) {
+    const dialogRef = this.taskDialog.open(ValidationFormComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (this.ValidatorService.validatePassword(result)) {
+        this.updateTaskStatus(task);
+      } else {
+        this.showError("Você não pode efetuar esse movimento.");
+        this.setTasksList(this.tasks);      
+      }
+      
+    });
+  }
+
   updateTaskStatus(item) {
 
     item.status = 
@@ -75,12 +94,25 @@ export class TasksComponent implements OnInit{
                       TasksStatus.TasksStatusEnum.finished : 
                       TasksStatus.TasksStatusEnum.pending;
 
+    if(item.status === TasksStatus.TasksStatusEnum.pending) {
+      item.restartedTimes++;
+    } 
+
     this.taskService.update(item, item.id).subscribe(res => {
-      console.log('res', res);
+      
+      //this.setTasksList(this.tasks);
+
     },
     error => {
-      console.log('error', error);
+      this.showError("Ops, Houve erro ao movimentar sua tarefa.");
     })
+  }
+
+  showError(message) {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: ["error"]
+    });
   }
 
 }
