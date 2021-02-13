@@ -50,7 +50,6 @@ export class FormComponent implements OnInit {
 
   saveTask() {
     this.task = this.taskForm.value;
-    console.log('task', this.task);
     let action;
     if(this.task.id){
       action = this .taskService.update(this.task, this.task.id);
@@ -60,7 +59,8 @@ export class FormComponent implements OnInit {
     
     action.subscribe(
       res => {
-        this.showResponseMessage("Task Salva com sucesso");        
+        this.showResponseMessage("Task Salva com sucesso");
+        this.dialogRef.close(false);
       },
       error => {
         this.showResponseMessage("Erro ao salvar a task", "error");

@@ -4,11 +4,11 @@
             <h2 class="status-title">Pendentes</h2>
             <div
                 cdkDropList
-                [cdkDropListData]="todoTasks"
+                [cdkDropListData]="pendingTasks"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
                 <div class="example-box" 
-                    *ngFor="let item of todoTasks" 
+                    *ngFor="let item of pendingTasks" 
                     (click)="openTaskDialog(item)"
                     cdkDrag>
                     <div class="actions">
@@ -25,10 +25,10 @@
             <h2 class="status-title">Concluídas</h2>
             <div
                 cdkDropList
-                [cdkDropListData]="done"
+                [cdkDropListData]="finishedTasks"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of done" cdkDrag>
+                <div class="example-box" *ngFor="let item of finishedTasks" cdkDrag>
                     {{item.description}}
                 </div>
             </div>

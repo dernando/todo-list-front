@@ -15,7 +15,8 @@ import { TasksService } from "../../services/tasks.service";
 export class TasksComponent implements OnInit{
 
   tasks:Task[];
-  todoTasks:Task[];
+  pendingTasks:Task[];
+  finishedTasks:Task[];
 
   constructor(
     private taskService: TasksService,
@@ -25,7 +26,8 @@ export class TasksComponent implements OnInit{
   ngOnInit(){
     this.taskService.getAll().subscribe(
       item => {
-        this.todoTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.pending);
+        this.pendingTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.pending);
+        this.finishedTasks = item.filter(item => item.status==TasksStatus.TasksStatusEnum.finished);
       },
       error => {
         console.log('error', error);
@@ -37,15 +39,25 @@ export class TasksComponent implements OnInit{
   ];
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('oioio');
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    console.log('event', event.container.data[0])
+    console.log('event', event.previousContainer.data[0]['status'])
+    let item = event.previousContainer.data[0];
+
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+
+        this.updateTaskStatus(item);
+    
+    }
+    /*else {
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-    }
+    }*/
   }
 
   openTaskDialog(item: Task): void {
@@ -53,7 +65,22 @@ export class TasksComponent implements OnInit{
     const dialogRef = this.taskDialog.open(FormComponent, {
       width: '400px',
       data: item
-    });    
+    });
+  }
+
+  updateTaskStatus(item) {
+
+    item.status = 
+      item.status === TasksStatus.TasksStatusEnum.pending ? 
+                      TasksStatus.TasksStatusEnum.finished : 
+                      TasksStatus.TasksStatusEnum.pending;
+
+    this.taskService.update(item, item.id).subscribe(res => {
+      console.log('res', res);
+    },
+    error => {
+      console.log('error', error);
+    })
   }
 
 }

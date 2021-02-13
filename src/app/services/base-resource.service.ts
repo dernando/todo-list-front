@@ -49,6 +49,13 @@ export class BaseResourceService<T> {
       
       return this.http.put(url, resource).pipe(map(this.jsonDatatoResource), catchError(this.handleError));
   }
+
+  patchValue(resource: T, id:any): Observable<T> {
+    this.getBaseUrl();
+    const url = id ? `${this.finalUrl}/${id}` : this.finalUrl;
+    
+    return this.http.patch(url, resource).pipe(map(this.jsonDatatoResource), catchError(this.handleError));
+  }
   
   protected jsonDatatoResources(jsonData: any[]): T[] {
     return jsonData;
