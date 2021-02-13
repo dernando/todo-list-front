@@ -9,6 +9,7 @@ export const environment = {
     url: "https://apilayer.net/api",
     accessKey: "8bcb2c27379573e23dfdd0ddb478573a",
   },
+  catFactUrl:"http://cat-fact.herokuapp.com",
   superVisorPass :"TrabalheNaSaipos", 
 };
 

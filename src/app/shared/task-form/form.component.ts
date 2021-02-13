@@ -3,9 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Task, TasksStatus } from 'src/app/models/task';
-import { TasksService } from 'src/app/services/tasks.service';
-import { EmailLayerService } from 'src/app/services/emailLayer.service';
+import { Task, TasksStatus } from '../../models/task';
+import { TasksService } from '../../services/tasks.service';
+import { EmailLayerService } from '../../services/email-layer.service';
 
 @Component({
   selector: 'app-form',

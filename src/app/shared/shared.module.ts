@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormComponent } from '../shared/task-form/form.component';
+import { NoTaskFormComponent } from './no-task-form/no-task-form.component';
 
 @NgModule({
-  declarations: [FormComponent],
+  declarations: [FormComponent, NoTaskFormComponent],
   imports: [
     CommonModule,
     MatToolbarModule,

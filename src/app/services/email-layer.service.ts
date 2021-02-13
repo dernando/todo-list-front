@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class EmailLayerService {
         const checkEmailUrl = 
             `${this.mailBoxLayerUrk}/check?access_key=${this.accessKey}&email=${email}&smtp=1&format=1`;
 
-        return this.http.get(checkEmailUrl).pipe(map(response => response));
+        return this.http.get(checkEmailUrl).pipe(map(response => response), catchError(err => err));
     
     }
 }

@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Nova tarefa</h1>
+<h3>Olá, está sem tarefas no momento?</h3>
+
+<div mat-dialog-content>
+    <p>Temos algumas para você :).</p>
+    <p>
+        Clique no botão gerar tarefas e você
+        poderá vê-las.
+    </p>
+</div>
+<div mat-dialog-actions class="actions">
+    <button 
+    mat-button 
+    mat-stroked-button 
+    color="warn"
+    [mat-dialog-close]=""
+    >
+    Cancelar
+    </button>
+    
+    <button 
+    type="submit" 
+    mat-raised-button 
+    color="primary"
+    (click)="generateRandomTasks()"
+    >
+    Gerar Tarefas
+    </button>
+</div>
