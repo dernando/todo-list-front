@@ -3,7 +3,24 @@
 html, body { height: 100%; }
 body { 
     margin: 0;
-    background-color: lightblue;
+    background: url("assets/backgroung.jpg");    
+    min-height: 100vh;
+}
+
+.header {
+    mat-toolbar{
+        background: transparent;
+        color: #000;
+    }
+}
+
+.footer {
+    position: relative;
+    margin-top: 3rem;    
+    bottom: 0;
+    background: transparent;
+    color: #000;
+    text-align: center;
 }
 
 .w-full {
