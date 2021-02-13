@@ -28,6 +28,7 @@ export class TasksComponent implements OnInit{
     private snackBarService: SnackBarService
   ) {
     this.taskService.currentTasksSubject.subscribe(result => {
+      console.log('result', result);
       if(result){
         this.setTasksList(result);
       }         
@@ -70,7 +71,6 @@ export class TasksComponent implements OnInit{
   }
 
   openTaskDialog(item: Task): void {
-    console.log('item 2', item);
     const dialogRef = this.taskDialog.open(FormComponent, {
       width: '400px',
       data: item

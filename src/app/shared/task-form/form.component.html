@@ -1,7 +1,8 @@
 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
 
   <h1 mat-dialog-title>Nova tarefa</h1>
-  <h3>Vamos adicionar uma tarefa nova?</h3>
+  <h3 *ngIf="!taskForm.value.id">Vamos adicionar uma tarefa nova?</h3>
+  <h3 *ngIf="taskForm.value.id">Deseja fazer mudanças na tarefa?</h3>
 
   <div mat-dialog-content>
       <mat-form-field class="w-full" appearance="fill">

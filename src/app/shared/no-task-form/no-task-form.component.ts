@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Task } from '../../models/task';
+import { Task, TasksStatus } from '../../models/task';
 import { TasksService } from '../../services/tasks.service';
 import { animalFactsService } from "../../services/animal-facts.service";
 import { SnackBarService } from "../../services/snackbar.service";
@@ -59,7 +59,12 @@ export class NoTaskFormComponent {
 
   saveTasks() {
     this.tasksService.createMultiTasks(this.tasks).subscribe(res => {
-      
+      this.tasks = this.tasks.map((item, key) => {
+        item.id = res['id'][key];
+        item.status = TasksStatus.TasksStatusEnum.pending;
+        return item;
+      });
+
       this.tasksService.appendMultiTask(this.tasks);
       
       this.tasks = [];

@@ -23,6 +23,7 @@ export class TasksService extends BaseResourceService<Task>{
     }
 
     setCurrentTasks(tasks: Task[]) {
+        console.log('tasks', tasks);
         this.currentTasksSubject.next(tasks);
     }
 
