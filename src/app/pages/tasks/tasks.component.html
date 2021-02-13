@@ -5,10 +5,10 @@
             <div
                 cdkDropList
                 [cdkDropListData]="pendingTasks"
-                class="example-list"
+                class="task-list"
                 (cdkDropListDropped)="drop($event)">
                 <app-card-task 
-                    class="example-box" 
+                    class="task-box" 
                     *ngFor="let item of pendingTasks" 
                     (click)="openTaskDialog(item)"
                     cdkDrag
@@ -21,10 +21,10 @@
             <div
                 cdkDropList
                 [cdkDropListData]="finishedTasks"
-                class="example-list"
+                class="task-list"
                 (cdkDropListDropped)="drop($event)">
                 <app-card-task 
-                    class="example-box" 
+                    class="task-box" 
                     *ngFor="let item of finishedTasks" 
                     (click)="openTaskDialog(item)"
                     cdkDrag

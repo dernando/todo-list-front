@@ -3,8 +3,7 @@
 html, body { height: 100%; }
 body { 
     margin: 0;
-    background: url("assets/backgroung.jpg");    
-    min-height: 100vh;
+    background: url("assets/backgroung.jpg");
 }
 
 .header {
@@ -15,7 +14,7 @@ body {
 }
 
 .footer {
-    position: relative;
+    width: 100%;
     margin-top: 3rem;    
     bottom: 0;
     background: transparent;

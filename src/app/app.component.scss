@@ -4,3 +4,7 @@ $areas:"header" "content" "footer";
     display: grid;
     grid-template-areas: $areas;
 }
+
+.content {
+    min-height: 75vh;
+}
