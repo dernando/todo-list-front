@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import { Tasks, TasksStatus } from "../../models/Tasks";
+import { Task, TasksStatus } from "../../models/task";
 import { TasksService } from "../../services/tasks.service";
 
 @Component({
@@ -11,8 +11,8 @@ import { TasksService } from "../../services/tasks.service";
 })
 export class TasksComponent implements OnInit{
 
-  tasks:Tasks[];
-  todoTasks:Tasks[];
+  tasks:Task[];
+  todoTasks:Task[];
 
   constructor(
     private taskService: TasksService

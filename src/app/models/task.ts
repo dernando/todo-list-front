@@ -1,4 +1,4 @@
-export class Tasks {
+export class Task {
     id: number;
     description: string;
     owner: string;

@@ -4,7 +4,10 @@
       <span>My Todo</span>
     </div>
     <div>
-      <button mat-raised-button color="primary" aria-label="Example icon-button with menu icon">
+      <button 
+        (click)="openTaskDialog()"
+        mat-raised-button color="primary" 
+        aria-label="Example icon-button with menu icon">
         Adicionar Tarefa
         <mat-icon>add</mat-icon>
       </button>

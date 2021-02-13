@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Nova tarefa</h1>
+<h3>Vamos adicionar uma tarefa nova?</h3>
+
+<div mat-dialog-content>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Quem é o responsável?</mat-label>
+      <input matInput formControlName="owner">
+      <mat-error *ngIf="taskForm.controls.owner.hasError('required')">Por favor, preencha este campo.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Qual é o e-mail do responsável?</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="taskForm.controls.email.hasError('required')">Por favor, preencha este campo.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Fale sobre a tarefa</mat-label>
+      <textarea matInput rows="5" formControlName="description"></textarea>
+      <mat-error *ngIf="taskForm.controls.description.hasError('required')">Por favor, preencha este campo.</mat-error>
+    </mat-form-field>
+  </form>
+  
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button mat-stroked-button color="warn">Cancelar</button>
+  <button type="submit" mat-raised-button color="primary">Salvar</button>
+</div>
