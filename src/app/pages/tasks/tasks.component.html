@@ -1,6 +1,7 @@
 <div cdkDropListGroup>
-    <div class="tasks">
-        <div class="drag pending">
+    <div class="tasks w-full">
+        <div class="w-half pending">
+            <h2 class="status-title">Pendentes</h2>
             <div
                 cdkDropList
                 [cdkDropListData]="todoTasks"
@@ -12,13 +13,16 @@
                 </div>
             </div>
         </div>
-        <div class="drag finished">
+        <div class="w-half finished">
+            <h2 class="status-title">Concluídas</h2>
             <div
                 cdkDropList
                 [cdkDropListData]="done"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+                <div class="example-box" *ngFor="let item of done" cdkDrag>
+                    {{item.description}}
+                </div>
             </div>
         </div>
     </div>
