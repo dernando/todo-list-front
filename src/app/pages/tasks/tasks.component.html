@@ -23,9 +23,14 @@
                 [cdkDropListData]="finishedTasks"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of finishedTasks" cdkDrag>
-                    {{item.description}}
-                </div>
+                <app-card-task 
+                    class="example-box" 
+                    *ngFor="let item of finishedTasks" 
+                    (click)="openTaskDialog(item)"
+                    cdkDrag
+                    [cdkDragDisabled]="item.restartedTimes >= 2"
+                    [item]="item"
+                ></app-card-task>
             </div>
         </div>
     </div>
