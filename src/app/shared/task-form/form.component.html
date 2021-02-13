@@ -3,7 +3,10 @@
   <h1 mat-dialog-title>Nova tarefa</h1>
   <h3 *ngIf="!taskForm.value.id">Vamos adicionar uma tarefa nova?</h3>
   <h3 *ngIf="taskForm.value.id">Deseja fazer mudanças na tarefa?</h3>
-
+  <h3 class="saving" *ngIf="saving">
+    Salvando...
+    <mat-spinner></mat-spinner>  
+  </h3>
   <div mat-dialog-content>
       <mat-form-field class="w-full" appearance="fill">
         <mat-label>Quem é o responsável?</mat-label>

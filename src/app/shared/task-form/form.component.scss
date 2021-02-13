@@ -1,4 +1,21 @@
+$display-flex: flex;
+$width-height-20: 20px;
+
 .actions {
-    display: flex;
+    display: $display-flex;
     justify-content: space-between;
+}
+
+.saving {
+    display: $display-flex;
+    mat-spinner {
+        width: $width-height-20 !important;
+        height: $width-height-20 !important;
+        ::ng-deep {            
+            svg {
+                width: $width-height-20 !important;
+                height: $width-height-20 !important;
+            }
+        }
+    }
 }

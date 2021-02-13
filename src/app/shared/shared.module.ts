@@ -8,6 +8,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { FormComponent } from '../shared/task-form/form.component';
 import { NoTaskFormComponent } from './no-task-form/no-task-form.component';
@@ -23,7 +24,8 @@ import { NoTaskFormComponent } from './no-task-form/no-task-form.component';
     DragDropModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -35,7 +37,8 @@ import { NoTaskFormComponent } from './no-task-form/no-task-form.component';
     FormComponent,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }
