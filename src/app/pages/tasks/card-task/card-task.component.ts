@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from "../../../models/task";
 @Component({
   selector: 'app-card-task',
   templateUrl: './card-task.component.html',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardTaskComponent implements OnInit {
 
+  @Input('item') item: Task;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log('item', this.item);
   }
 
 }

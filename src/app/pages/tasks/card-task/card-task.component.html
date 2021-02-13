@@ -1,1 +1,7 @@
-<p>card-task works!</p>
+<div class="actions">
+    <a>
+        <mat-icon>mode_edit</mat-icon>
+    </a>
+</div>
+<p [innerHtml]="item.description" class="description"></p>
+<mat-hint>{{item?.owner}}</mat-hint>

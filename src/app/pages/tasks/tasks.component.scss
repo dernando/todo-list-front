@@ -4,15 +4,15 @@ $border-radius-5: 5px;
   margin-top: 1rem;
   display: flex;
   justify-content: space-around;
-  width: 100%;
   
   .pending,
   .finished {
     height: 100%;
-    width: 40%;  
+    width: 40%;
     background-color: #ebecf0;
     padding: 1rem;
     border-radius: $border-radius-5;
+    max-width: 40%;
   }
 }
 
@@ -44,15 +44,6 @@ $border-radius-5: 5px;
   border-radius: $border-radius-5;
   position: relative;
   
-  .actions {
-    top: 10px;
-    right: 10px;            
-    position: absolute;
-    border: solid 1px #ccc;
-    border-radius: $border-radius-5;
-    display: none;
-  }
-  
   p{
     font-size: 14px;
     margin-bottom: 0;
@@ -66,12 +57,6 @@ $border-radius-5: 5px;
   mat-hint {
     font-size: 12px;
     font-style: italic;
-  }
-
-  &:hover {
-    .actions {
-      display: block;
-    }
   }
 
 }
