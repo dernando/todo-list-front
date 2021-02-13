@@ -8,7 +8,7 @@ import { ValidationFormComponent } from './validation-form/validation-form.compo
 import { Task, TasksStatus } from "../../models/task";
 import { TasksService } from "../../services/tasks.service";
 import { ValidatorService } from "../../services/validator.service";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-tasks',
@@ -25,14 +25,20 @@ export class TasksComponent implements OnInit{
     private taskService: TasksService,
     private ValidatorService: ValidatorService,
     public taskDialog: MatDialog,
-    private _snackBar: MatSnackBar
-  ) {}
+    private snackBarService: SnackBarService
+  ) {
+    this.taskService.currentTasksSubject.subscribe(result => {
+      if(result){
+        this.setTasksList(result);
+      }         
+    });
+  }
 
   ngOnInit(){
     this.taskService.getAll().subscribe(
       item => {
-        this.setTasksList(item);
-       },
+        this.taskService.setCurrentTasks(item);
+      },
       error => {
       }
     )
@@ -64,7 +70,7 @@ export class TasksComponent implements OnInit{
   }
 
   openTaskDialog(item: Task): void {
-    
+    console.log('item 2', item);
     const dialogRef = this.taskDialog.open(FormComponent, {
       width: '400px',
       data: item
@@ -80,8 +86,8 @@ export class TasksComponent implements OnInit{
       if (this.ValidatorService.validatePassword(result)) {
         this.updateTaskStatus(task);
       } else {
-        this.showError("Você não pode efetuar esse movimento.");
-        this.setTasksList(this.tasks);      
+        this.snackBarService.showErrorMessage("Você não pode efetuar esse movimento.");
+        this.taskService.setCurrentTasks(this.tasks);      
       }
       
     });
@@ -99,20 +105,11 @@ export class TasksComponent implements OnInit{
     } 
 
     this.taskService.update(item, item.id).subscribe(res => {
-      
-      //this.setTasksList(this.tasks);
 
     },
     error => {
-      this.showError("Ops, Houve erro ao movimentar sua tarefa.");
+      this.snackBarService.showErrorMessage("Ops, Houve erro ao movimentar sua tarefa.");
     })
-  }
-
-  showError(message) {
-    this._snackBar.open(message, "", {
-      duration: 2000,
-      panelClass: ["error"]
-    });
   }
 
 }

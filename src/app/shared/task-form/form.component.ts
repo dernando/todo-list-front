@@ -75,16 +75,22 @@ export class FormComponent implements OnInit {
   saveTask() {
     this.task = this.taskForm.value;
     let action;
-    if(this.task.id){
-      action = this.taskService.update(this.task, this.task.id);
+    const taskId = this.task.id ? this.task.id : null
+    
+    if(taskId){
+      action = this.taskService.update(this.task, taskId);
     } else {
       action = this.taskService.create(this.task);
     }
     
     action.subscribe(
       res => {
+        this.task.id = taskId ? taskId : res['id'];
+        this.taskService.appendTask(this.task, taskId);
+        
         this.showResponseMessage("Task Salva com sucesso");
         this.dialogRef.close(false);
+      
       },
       error => {
         this.showResponseMessage("Erro ao salvar a task", "error");

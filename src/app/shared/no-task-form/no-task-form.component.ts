@@ -59,6 +59,9 @@ export class NoTaskFormComponent {
 
   saveTasks() {
     this.tasksService.createMultiTasks(this.tasks).subscribe(res => {
+      
+      this.tasksService.appendMultiTask(this.tasks);
+      
       this.tasks = [];
       this.snackBarService.showSuccessMessage("Atividades criadas com sucesso!");
       this.dialogRef.close();
