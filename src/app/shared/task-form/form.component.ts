@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Task, TasksStatus } from 'src/app/models/task';
 import { TasksService } from 'src/app/services/tasks.service';
+import { EmailLayerService } from 'src/app/services/emailLayer.service';
 
 @Component({
   selector: 'app-form',
@@ -24,9 +25,13 @@ export class FormComponent implements OnInit {
     restartedTimes: [null]
   });
 
+  showEmailAlert: boolean;
+  emailSuggestion: string;
+
   constructor(
     private formBuilder: FormBuilder,
-    private taskService: TasksService,
+    private taskService: TasksService,    
+    private emailLayerService: EmailLayerService,
     public dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Task,
     private _snackBar: MatSnackBar
@@ -40,7 +45,26 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if(!this.taskForm.invalid) {
-      this.saveTask();
+      this.emailLayerService.checkEmail(this.taskForm.value.email).subscribe(
+        res => {
+          
+          if(res['did_you_mean']) {
+            this.emailSuggestion = res['did_you_mean'];
+          }
+
+          if(!res['smtp_check']) {
+            this.showEmailAlert = true;
+            return;
+          }
+          
+          this.saveTask();
+
+        },
+        error => {
+          console.log('error', error);
+        }
+      );
+      //this.saveTask();
     }
   }
 
@@ -52,9 +76,9 @@ export class FormComponent implements OnInit {
     this.task = this.taskForm.value;
     let action;
     if(this.task.id){
-      action = this .taskService.update(this.task, this.task.id);
+      action = this.taskService.update(this.task, this.task.id);
     } else {
-      action = this .taskService.create(this.task);
+      action = this.taskService.create(this.task);
     }
     
     action.subscribe(

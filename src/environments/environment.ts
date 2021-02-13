@@ -5,6 +5,10 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:4000",
+  mailBoxLayer: {
+    url: "https://apilayer.net/api",
+    accessKey: "8bcb2c27379573e23dfdd0ddb478573a",
+  },
   superVisorPass :"TrabalheNaSaipos", 
 };
 

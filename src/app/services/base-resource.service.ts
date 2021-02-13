@@ -10,8 +10,10 @@ export class BaseResourceService<T> {
 
   protected http: HttpClient;
   headers = new HttpHeaders();
+  
   private baseUrlApi = environment.apiUrl;
   private finalUrl: string;
+  
   constructor(
     protected apiPath: string,
     protected injector: Injector
