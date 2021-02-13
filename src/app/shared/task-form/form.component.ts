@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Task, TasksStatus } from 'src/app/models/task';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -27,7 +28,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private taskService: TasksService,
     public dialogRef: MatDialogRef<FormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Task
+    @Inject(MAT_DIALOG_DATA) public data: Task,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -57,13 +59,20 @@ export class FormComponent implements OnInit {
     }
     
     action.subscribe(
-        res => {
-          console.log('res', res); 
-          },
+      res => {
+        this.showResponseMessage("Task Salva com sucesso");        
+      },
       error => {
-        console.log('error', error);
+        this.showResponseMessage("Erro ao salvar a task", "error");
       }
     )
+  }
+
+  showResponseMessage(message: string, type:string = "success") : void {
+    this._snackBar.open(message, "", {
+      duration: 2000,
+      panelClass: [type]
+    });
   }
 
 }

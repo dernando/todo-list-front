@@ -7,6 +7,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormComponent } from '../shared/task-form/form.component';
 
@@ -32,7 +33,8 @@ import { FormComponent } from '../shared/task-form/form.component';
     MatInputModule,
     FormComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

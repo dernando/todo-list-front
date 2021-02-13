@@ -13,3 +13,19 @@ body {
 .w-half {
     width: 100%;
 }
+
+.success,
+.error {
+    opacity: .8;
+    border: solid 1px #FFF;
+}
+
+.success {
+    background: rgb(9,121,50);
+    background: linear-gradient(90deg, rgba(9,121,50,1) 0%, rgba(8,161,82,1) 35%, rgba(0,255,161,1) 100%);    
+}
+
+.error {
+    background: rgb(231,0,0);
+    background: linear-gradient(90deg, rgba(231,0,0,1) 0%, rgba(253,29,29,1) 50%, rgba(253,29,29,1) 100%);
+}
