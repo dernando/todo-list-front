@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+
+import { FormComponent } from '../../shared/task-form/form.component';
 
 import { Task, TasksStatus } from "../../models/task";
 import { TasksService } from "../../services/tasks.service";
@@ -15,7 +18,8 @@ export class TasksComponent implements OnInit{
   todoTasks:Task[];
 
   constructor(
-    private taskService: TasksService
+    private taskService: TasksService,
+    public taskDialog: MatDialog
   ) {}
 
   ngOnInit(){
@@ -28,13 +32,6 @@ export class TasksComponent implements OnInit{
       }
     )
   }
-
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
 
   done = [
   ];
@@ -51,8 +48,12 @@ export class TasksComponent implements OnInit{
     }
   }
 
-  edit(item) {
-    console.log('edit item', item);
+  openTaskDialog(item: Task): void {
+    
+    const dialogRef = this.taskDialog.open(FormComponent, {
+      width: '400px',
+      data: item
+    });    
   }
 
 }

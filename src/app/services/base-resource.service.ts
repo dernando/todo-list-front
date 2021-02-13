@@ -30,7 +30,7 @@ export class BaseResourceService<T> {
     return this.http.get(this.finalUrl).pipe(catchError(this.handleError), map(this.jsonDatatoResources));
   }
 
-  getById(id: string): Observable<T> {
+  getById(id: number): Observable<T> {
     this.getBaseUrl();
     
     const url = `${this.finalUrl}/${id}`;
@@ -43,9 +43,9 @@ export class BaseResourceService<T> {
     return this.http.post(this.finalUrl, resource).pipe(map(this.jsonDatatoResource), catchError(this.handleError));
   }
 
-  update(resource: T, uuid:string=null): Observable<T> {
+  update(resource: T, id:number): Observable<T> {
       this.getBaseUrl();
-      const url = uuid ? `${this.finalUrl}/${uuid}` : this.finalUrl;
+      const url = id ? `${this.finalUrl}/${id}` : this.finalUrl;
       
       return this.http.put(url, resource).pipe(map(this.jsonDatatoResource), catchError(this.handleError));
   }

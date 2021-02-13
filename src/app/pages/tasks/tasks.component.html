@@ -7,9 +7,17 @@
                 [cdkDropListData]="todoTasks"
                 class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of todoTasks" cdkDrag>
-                    <button (click)="edit(item)">teste</button>    
-                    {{item.description}}
+                <div class="example-box" 
+                    *ngFor="let item of todoTasks" 
+                    (click)="openTaskDialog(item)"
+                    cdkDrag>
+                    <div class="actions">
+                        <a>
+                            <mat-icon>mode_edit</mat-icon>
+                        </a>
+                    </div>
+                    <p [innerHtml]="item.description"></p>
+                    <mat-hint>{{item?.owner}}</mat-hint>
                 </div>
             </div>
         </div>

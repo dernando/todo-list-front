@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 
 import { TasksComponent } from './tasks.component';
+import { CardTaskComponent } from './card-task/card-task.component';
 
 const routes: Routes = [{
   path: "",
@@ -12,7 +13,7 @@ const routes: Routes = [{
 
 
 @NgModule({
-  declarations: [TasksComponent],
+  declarations: [TasksComponent, CardTaskComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { Task, TasksStatus } from 'src/app/models/task';
 import { TasksService } from 'src/app/services/tasks.service';
 
@@ -13,6 +15,7 @@ export class FormComponent implements OnInit {
   task:Task;
 
   taskForm = this.formBuilder.group({
+    id: [null],
     owner:[null,[Validators.required]],
     email: [null,[Validators.required]],
     description: [null,[Validators.required]],
@@ -22,10 +25,15 @@ export class FormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private taskService: TasksService
+    private taskService: TasksService,
+    public dialogRef: MatDialogRef<FormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Task
   ) { }
 
   ngOnInit(): void {
+    if(this.data && this.data.id) {
+      this.fillFormValues();
+    }
   }
 
   onSubmit() {
@@ -34,13 +42,21 @@ export class FormComponent implements OnInit {
     }
   }
 
+  fillFormValues() {
+    this.taskForm.patchValue(this.data);
+  }
+
   saveTask() {
     this.task = this.taskForm.value;
+    console.log('task', this.task);
+    let action;
+    if(this.task.id){
+      action = this .taskService.update(this.task, this.task.id);
+    } else {
+      action = this .taskService.create(this.task);
+    }
     
-    this
-      .taskService
-      .create(this.task)
-      .subscribe(
+    action.subscribe(
         res => {
           console.log('res', res); 
           },
