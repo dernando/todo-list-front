@@ -1,0 +1,50 @@
+$border-radius-5: 5px;
+
+.tasks {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  
+  .pending,
+  .finished {
+    height: 100%;
+    width: 40%;
+    background-color: #5269e6;
+    opacity: .9;
+    padding: 1rem;
+    max-width: 40%;
+  }
+}
+
+.status-title {
+  text-align: center;
+  margin-bottom: 0;
+  color: #FFF;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.task-list {
+  min-height: 60px;
+  height: 100%;
+  padding: .5rem;
+  background-color: #d1d1d133;
+  overflow: hidden;
+  display: block;
+}
+
+.task-box {
+  margin: 10px 0;
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  min-height: 20px;
+  border-radius: $border-radius-5;
+  position: relative;
+
+}

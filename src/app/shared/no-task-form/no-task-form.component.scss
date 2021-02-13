@@ -1,0 +1,7 @@
+$display-flex: flex;
+$width-height-20: 20px;
+
+.actions {
+    display: $display-flex;
+    justify-content: space-between;
+}

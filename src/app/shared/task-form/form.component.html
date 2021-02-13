@@ -1,0 +1,55 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+  <h1 mat-dialog-title>Nova tarefa</h1>
+  <h3 *ngIf="!taskForm.value.id">Vamos adicionar uma tarefa nova?</h3>
+  <h3 *ngIf="taskForm.value.id">Deseja fazer mudanças na tarefa?</h3>
+  <h3 class="saving" *ngIf="saving">
+    Salvando...
+    <mat-spinner></mat-spinner>  
+  </h3>
+  <div mat-dialog-content>
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Quem é o responsável?</mat-label>
+        <input matInput formControlName="owner">
+        <mat-error *ngIf="taskForm.controls.owner.hasError('required')">Por favor, preencha este campo.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Qual é o e-mail do responsável?</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="taskForm.controls.email.hasError('required')">Por favor, preencha este campo.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Fale sobre a tarefa</mat-label>
+        <textarea matInput rows="5" formControlName="description"></textarea>
+        <mat-error *ngIf="taskForm.controls.description.hasError('required')">Por favor, preencha este campo.</mat-error>
+      </mat-form-field>
+
+      
+      <mat-error *ngIf="showEmailAlert">
+        O e-mail inserido é inválido.
+        <span *ngIf="emailSuggestion">
+          <br>
+          Nossa Sugestão: {{emailSuggestion}}
+        </span> 
+      </mat-error>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button 
+      mat-button 
+      mat-stroked-button 
+      color="warn"
+      [mat-dialog-close]=""
+    >
+      Cancelar
+    </button>
+    
+    <button 
+      type="submit" 
+      mat-raised-button 
+      color="primary" 
+      [disabled]="taskForm.invalid"
+      >
+      Salvar
+    </button>
+  </div>
+</form>

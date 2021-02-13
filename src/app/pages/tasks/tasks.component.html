@@ -1,0 +1,37 @@
+<div cdkDropListGroup>
+    <div class="tasks w-full">
+        <div class="w-half pending">
+            <h3 class="status-title">Pendentes</h3>
+            <div
+                cdkDropList
+                [cdkDropListData]="pendingTasks"
+                class="task-list"
+                (cdkDropListDropped)="drop($event)">
+                <app-card-task 
+                    class="task-box" 
+                    *ngFor="let item of pendingTasks" 
+                    (click)="openTaskDialog(item)"
+                    cdkDrag
+                    [item]="item"
+                ></app-card-task>
+            </div>
+        </div>
+        <div class="w-half finished">
+            <h3 class="status-title">Concluídas</h3>
+            <div
+                cdkDropList
+                [cdkDropListData]="finishedTasks"
+                class="task-list"
+                (cdkDropListDropped)="drop($event)">
+                <app-card-task 
+                    class="task-box" 
+                    *ngFor="let item of finishedTasks" 
+                    (click)="openTaskDialog(item)"
+                    cdkDrag
+                    [cdkDragDisabled]="item.restartedTimes >= 2"
+                    [item]="item"
+                ></app-card-task>
+            </div>
+        </div>
+    </div>
+</div>

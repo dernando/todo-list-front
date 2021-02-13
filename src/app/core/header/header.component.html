@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <div class="nav">
+    <div>
+      <span>My Todo</span>
+    </div>
+    <div>
+      <button 
+        (click)="openTaskDialog()"
+        mat-raised-button color="primary" 
+        aria-label="Example icon-button with menu icon">
+        Adicionar Tarefa
+        <mat-icon>add</mat-icon>
+      </button>
+      &nbsp;
+      <button 
+        (click)="openDialogNoTasks()"
+        mat-raised-button color="default" 
+        aria-label="Example icon-button with menu icon">
+        Estou sem tarefas
+        <mat-icon>playlist_add</mat-icon>
+      </button>
+    </div> 
+  </div>
+</mat-toolbar>
